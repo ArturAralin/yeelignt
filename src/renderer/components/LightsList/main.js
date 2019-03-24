@@ -1,4 +1,4 @@
-import debounce from 'debounce';
+// import debounce from 'debounce';
 import * as yee from '@/common/yeelight-api';
 
 const BRIGHT_STEPS = [...Array(101)]
@@ -11,6 +11,7 @@ export default {
   data: () => ({
     BRIGHT_STEPS,
     lightsList: [],
+    slider: 0,
   }),
   async mounted() {
     const discover = await yee.getDiscover();
@@ -20,15 +21,19 @@ export default {
       .all(lights
         .map(({ host, port }) => yee.getYeelight(host, port)));
 
+    console.log(list);
+
     this.lightsList = list;
   },
   methods: {
-    toggle: debounce((light) => {
-      light.power = !light.power;
+    toggle(light) {
       light.connection.setPower(light.power, 'smooth', 300);
-    }, 100, true),
-    setBright: (light) => {
+    },
+    setBright(light) {
       light.connection.setBright(light.bright, 'smooth', 500);
+    },
+    setCt(light) {
+      light.connection.setCtAbx(light.colorTemperature, 'smooth', 500);
     },
   },
 };

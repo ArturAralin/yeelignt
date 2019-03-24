@@ -26,13 +26,13 @@ export const getYeelight = async (lightIp, lightPort) => {
     bright,
     power,
     name,
+    colorTemperature,
   ] = (await yeelight.getProperty([
     y.DevicePropery.BRIGHT,
     y.DevicePropery.POWER,
     y.DevicePropery.NAME,
+    y.DevicePropery.CT,
   ])).result.result;
-
-  console.log(name);
 
   return {
     lightIp,
@@ -41,5 +41,6 @@ export const getYeelight = async (lightIp, lightPort) => {
     name,
     bright: parseInt(bright, 10),
     power: power === 'on',
+    colorTemperature: parseInt(colorTemperature, 10),
   };
 };

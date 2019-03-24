@@ -1,4 +1,7 @@
-#wrapper {
-  padding: 60px 80px;
-  width: 100vw;
+.card_header {
+  display: inline-block;
+}
+.toggle_button {
+  float: right;
+  padding: 20px 0;
 }

@@ -1,32 +1,40 @@
 <template>
-  <div id="wrapper">
-    <v-card
-      :key="light.lightIp"
-      v-for="light in lightsList"
-    >
-      <v-card-title primary-title>
-        <div>
-          <h3 class="headline mb-0">{{light.name || 'Blub'}}</h3>
-          <div> {{ light.lightIp }} </div>
+  <el-row>
+    <el-col :span="24">
+      <el-card
+        :key="light.lightIp"
+        v-for="light in lightsList"
+      >
+        <div slot="header">
+          <h1 class="card_header">{{light.name || 'Blub'}} ({{light.lightIp}})</h1>
+          <el-switch
+            class="toggle_button"
+            v-model="light.power"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            active-text="Enable"
+            @change="toggle(light)"
+          ></el-switch>
         </div>
-      </v-card-title>
-
-      <v-card-actions>
-        <v-switch
-          v-model="light.power"
-          :label="`Enable`"
-          @click="toggle(light)"
-        ></v-switch>
-        <v-select
-          v-model="light.bright"
-          :items="BRIGHT_STEPS"
-          @change="setBright(light)"
-          label="Bright"
-          single-line
-        ></v-select>
-      </v-card-actions>
-    </v-card>
-  </div>
+        <div>
+          <span>Bright</span>
+          <el-slider
+            v-model="light.bright"
+            :min="1"
+            :max="100"
+            @change="setBright(light)"
+          ></el-slider>
+          <span>Color temperature</span>
+          <el-slider
+            v-model="light.colorTemperature"
+            :min="1700"
+            :max="6500"
+            @change="setCt(light)"
+          ></el-slider>
+        </div>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 
 <script src="./LightsList/main.js"></script>

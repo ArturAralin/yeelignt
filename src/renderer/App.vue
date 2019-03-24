@@ -1,9 +1,17 @@
 <template>
   <div id="app">
-    <div class="logo">
-      <img src="/static/logo.png">
-    </div>
-    <router-view></router-view>
+  <el-container>
+    <el-header
+      height="auto"
+    >
+      <div class="logo">
+        <img src="/static/logo.png">
+      </div>
+    </el-header>
+    <el-main>
+      <router-view></router-view>
+    </el-main>
+  </el-container>
   </div>
 </template>
 
@@ -15,13 +23,6 @@
 
 <style scoped>
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
   body {
     background:
     radial-gradient(
